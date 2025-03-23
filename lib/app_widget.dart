@@ -7,6 +7,7 @@ import 'package:app_kodigos/src/login/repositories/auth_repository.dart';
 import 'package:app_kodigos/src/login/repositories/auth_repository_impl.dart';
 import 'package:app_kodigos/src/register/datasource/register_datasource.dart';
 import 'package:app_kodigos/src/register/datasource/register_datasource_impl.dart';
+import 'package:app_kodigos/src/register/presenter/cubit/register_cubit.dart';
 import 'package:app_kodigos/src/register/presenter/register_page.dart';
 import 'package:app_kodigos/src/register/repositories/register_repository.dart';
 import 'package:dio/dio.dart';
@@ -54,8 +55,13 @@ class AppWidget extends StatelessWidget {
               ),
         ),
       ],
-      child: BlocProvider(
-        create: (context) => AuthCubit(authRepository: context.read<AuthRepository>()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<RegisterCubit>(
+            create: (context) => RegisterCubit(registerRepository: context.read<RegisterRepository>()),
+          ),
+          BlocProvider<AuthCubit>(create: (context) => AuthCubit(authRepository: context.read<AuthRepository>())),
+        ],
         child: MaterialApp(
           title: 'Order Service Manager',
           theme: ThemeData(primarySwatch: Colors.blue),

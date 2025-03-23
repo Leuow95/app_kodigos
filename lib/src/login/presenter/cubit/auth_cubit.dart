@@ -1,4 +1,4 @@
-import 'package:app_kodigos/src/login/presentar/cubit/auth_state.dart';
+import 'package:app_kodigos/src/login/presenter/cubit/auth_state.dart';
 import 'package:app_kodigos/src/login/repositories/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
