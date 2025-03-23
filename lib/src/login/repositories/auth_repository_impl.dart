@@ -1,17 +1,28 @@
 import 'package:app_kodigos/helpers/jwt_service.dart';
-import 'package:app_kodigos/src/login/datasource/auth_remote_datasource_impl.dart';
 import 'package:app_kodigos/src/login/repositories/auth_repository.dart';
+import 'package:dio/dio.dart';
 
 import '../datasource/auth_remote_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDatasource authRemoteDatasource = AuthRemoteDatasourceImpl();
-  final JwtService jwtService = JwtService();
+  final AuthRemoteDatasource authRemoteDatasource;
+  final JwtService jwtService;
+
+  AuthRepositoryImpl({required this.authRemoteDatasource, required this.jwtService});
 
   @override
   Future<String> login(String email, String password) async {
-    final token = await authRemoteDatasource.login(email, password);
-    jwtService.saveToken(token);
-    return token;
+    try {
+      final token = await authRemoteDatasource.login(email, password);
+      jwtService.saveToken(token);
+      return token;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        throw Exception('Email ou senha inválidos');
+      }
+      throw Exception('Erro ao fazer login');
+    } catch (e) {
+      throw Exception('Erro ao fazer login');
+    }
   }
 }

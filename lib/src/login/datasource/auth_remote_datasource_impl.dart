@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'auth_remote_datasource.dart';
 
 class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
-  final Dio dio = Dio();
+  final Dio dio;
+
+  AuthRemoteDatasourceImpl({required this.dio});
 
   @override
   Future<String> login(String email, String password) async {

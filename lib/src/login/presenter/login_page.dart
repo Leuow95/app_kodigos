@@ -1,4 +1,5 @@
-import 'package:app_kodigos/src/login/presentar/cubit/auth_state.dart';
+import 'package:app_kodigos/src/login/presenter/cubit/auth_state.dart';
+import 'package:app_kodigos/src/register/presenter/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,7 @@ class LoginPage extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/logo_kodigos.png', width: 200, height: 200),
+                Image.asset('assets/kodigos_logo.png', width: 200, height: 200),
                 SizedBox(height: 32),
                 TextField(
                   controller: emailController,
@@ -40,6 +41,13 @@ class LoginPage extends StatelessWidget {
                   controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(labelText: 'Senha', prefixIcon: Icon(Icons.lock)),
+                ),
+                SizedBox(height: 32),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                  },
+                  child: Text('Não tem conta? Cadastre-se'),
                 ),
                 SizedBox(height: 32),
                 ElevatedButton(
