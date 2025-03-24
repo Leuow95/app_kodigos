@@ -37,7 +37,7 @@ class _OrderPageState extends State<OrderPage> {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text('Ordem criada com sucesso!')));
-          Navigator.pop(context);
+          Navigator.of(context).pushNamed('/list-orders');
         }
       },
       child: Scaffold(
