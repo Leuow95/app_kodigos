@@ -44,7 +44,6 @@ class ListOrdersPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ID e Descrição
                         Text(
                           'OS #${order.id ?? 'N/A'}',
                           style: const TextStyle(
@@ -57,20 +56,7 @@ class ListOrdersPage extends StatelessWidget {
                           order.description ?? 'Sem descrição',
                           style: const TextStyle(fontSize: 16),
                         ),
-
-                        if (order.photoData != null &&
-                            order.photoData!.isNotEmpty)
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 16),
-                            child: Image.memory(
-                              base64Decode(order.photoData!),
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-
-                        // Checklist
+                        _buildImagePreview(order.photoData),
                         const Text(
                           'Checklist:',
                           style: TextStyle(
@@ -141,5 +127,36 @@ class ListOrdersPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _buildImagePreview(String? photoData) {
+    if (photoData == null || photoData.isEmpty) {
+      return Container();
+    }
+
+    try {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.memory(
+          base64Decode(photoData),
+          height: 150,
+          width: double.infinity,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              color: Colors.grey[200],
+              height: 150,
+              child: const Icon(Icons.error, color: Colors.red),
+            );
+          },
+        ),
+      );
+    } catch (e) {
+      return Container(
+        color: Colors.grey[200],
+        height: 150,
+        child: const Icon(Icons.error, color: Colors.red),
+      );
+    }
   }
 }
