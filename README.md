@@ -1,16 +1,95 @@
-# app_kodigos
+# Passos para Executar a Aplicação Flutter (Versão 3.29.0)
 
-A new Flutter project.
+## 1. Requisitos
+Antes de executar a aplicação, certifique-se de que possui os seguintes requisitos instalados:
 
-## Getting Started
+- [Flutter 3.29.0](https://docs.flutter.dev/get-started/install)
+- [Dart SDK](https://dart.dev/get-dart) (instalado com o Flutter)
+- Android Studio ou VS Code (com extensão Flutter e Dart)
+- Emulador Android ou dispositivo físico configurado
 
-This project is a starting point for a Flutter application.
+## 2. Configuração do Ambiente
 
-A few resources to get you started if this is your first Flutter project:
+1. Verifique a instalação do Flutter:
+   ```sh
+   flutter --version
+   ```
+   O retorno deve exibir **Flutter 3.29.0**.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. Confirme se todas as dependências estão configuradas corretamente:
+   ```sh
+   flutter doctor
+   ```
+   Se houver problemas, siga as recomendações do `flutter doctor` para resolvê-los.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 3. Clonando o Repositório
+Se ainda não clonou o repositório do seu projeto, faça isso com:
+```sh
+git clone https://github.com/Leuow95/app_kodigos.git
+```
+
+## 4. Instalando Dependências
+Execute o seguinte comando na raiz do projeto:
+```sh
+flutter pub get
+```
+Isso baixará todas as dependências listadas no `pubspec.yaml`.
+
+## 5. Configuração de Ambiente (Se Necessário)
+Caso utilize arquivos de ambiente, como `.env`, configure-os conforme a documentação do projeto.
+
+## 6. Executando a Aplicação
+
+### Em um Emulador ou Dispositivo Físico
+1. Conecte um dispositivo ou inicie um emulador:
+   ```sh
+   flutter devices
+   ```
+   Escolha o dispositivo desejado.
+
+2. Execute a aplicação:
+   ```sh
+   flutter run
+   ```
+
+### Em um Navegador (Flutter Web)
+Se o projeto suportar Flutter Web:
+```sh
+flutter run -d chrome
+```
+
+### Em um Servidor de Desenvolvimento
+Se precisar iniciar um servidor local:
+```sh
+flutter serve
+```
+
+## 7. Compilando para Produção
+
+### Android (APK/Bundle)
+Para gerar um APK:
+```sh
+flutter build apk
+```
+Para gerar um AAB (usado na Play Store):
+```sh
+flutter build appbundle
+```
+
+### iOS
+Certifique-se de ter um Mac com Xcode instalado:
+```sh
+flutter build ios
+```
+
+### Web
+Para compilar a aplicação web:
+```sh
+flutter build web
+```
+Os arquivos serão gerados na pasta `build/web`.
+
+
+---
+
+Seguindo esses passos, você conseguira executar e testar sua aplicação Flutter na versão 3.29.0 com sucesso.
