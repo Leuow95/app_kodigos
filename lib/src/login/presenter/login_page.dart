@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthLogged) {
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/order');
             }
             if (state is AuthError) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));

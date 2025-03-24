@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<String> login(String email, String password) async {
     try {
       final token = await authRemoteDatasource.login(email, password);
-      jwtService.saveToken(token);
+      await jwtService.saveToken(token);
       return token;
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {

@@ -9,6 +9,6 @@ class RegisterDatasourceImpl implements RegisterDataSource {
 
   @override
   Future<void> register(String email, String password) async {
-    await dio.post('http://localhost:8080/register', data: {'email': email, 'password': password});
+    await dio.post('http://10.0.2.2:8080/auth/register', data: {'username': email, 'password': password});
   }
 }
