@@ -21,6 +21,14 @@ class _OrderPageState extends State<OrderPage> {
   final checklistController = TextEditingController();
   XFile? _image;
 
+  final List<String> _services = [
+    'Limpeza de hardware',
+    'Verificação de software',
+    'Atualizações de sistema',
+    'Verificação de vírus',
+    'Backup de dados',
+  ];
+  final List<bool> _selectedServices = [false, false, false, false, false];
   @override
   Widget build(BuildContext context) {
     return BlocListener<OrderCubit, OrderState>(
@@ -34,32 +42,47 @@ class _OrderPageState extends State<OrderPage> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Nova Ordem')),
-        body: Padding(
-          padding: EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: descriptionController,
-                  decoration: InputDecoration(labelText: 'Descrição'),
-                ),
-                TextFormField(
-                  controller: checklistController,
-                  decoration: InputDecoration(
-                    labelText: 'Checklist (vírgula separada)',
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: descriptionController,
+                    decoration: InputDecoration(labelText: 'Descrição'),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: _pickImage,
-                  child: Text('Selecionar Foto'),
-                ),
-                if (_image != null) Image.file(File(_image!.path)),
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  child: Text('Criar Ordem'),
-                ),
-              ],
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < _services.length; i++)
+                          CheckboxListTile(
+                            title: Text(_services[i]),
+                            value: _selectedServices[i],
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedServices[i] = value ?? false;
+                              });
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: _pickImage,
+                    child: Text('Selecionar Foto'),
+                  ),
+                  if (_image != null) Image.file(File(_image!.path)),
+                  ElevatedButton(
+                    onPressed: _submitForm,
+                    child: Text('Criar Ordem'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
