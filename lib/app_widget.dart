@@ -101,7 +101,7 @@ class AppWidget extends StatelessWidget {
             create:
                 (context) => OrderListCubit(
                   listOrderRepository: context.read<ListOrderRepository>(),
-                ),
+                )..loadOrders(),
           ),
           BlocProvider<OrderCubit>(
             create:
